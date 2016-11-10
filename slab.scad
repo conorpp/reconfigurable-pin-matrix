@@ -15,7 +15,7 @@ module make_bearing_insert()
 {
     rotate([-90,0,0]) cylinder(bearing_depth,bearing_outside_r,bearing_outside_r);
     // infinite hole
-    rotate([-90,0,180]) cylinder(forever,bearing_inside_r+0.2,bearing_inside_r+0.2);
+    rotate([-90,0,180]) cylinder(forever,bearing_inside_r+0.2/SCALE,bearing_inside_r+0.2/SCALE);
 }
 
 

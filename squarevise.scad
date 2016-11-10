@@ -8,11 +8,6 @@ use <assembly.scad>
 
 module PinMatrix()
 {
-    pin_z = 150;
-    pin_x = 2;
-    matrix_pad = 15;
-    pin_pad = 0.0000;
-
     mx_pin_start = tall_wall_thickness + linear_rod_offset + matrix_pad + ptol;
     mx_pin_end = tall_wall_thickness + short_wall_l - linear_rod_offset - matrix_pad - ptol;
 
@@ -25,7 +20,7 @@ module PinMatrix()
 
 
     translate([tall_wall_thickness + linear_rod_offset + matrix_pad + ptol,
-            short_wall_thickness + slab_thickness + ptol + matrix_pad, -50])
+            short_wall_thickness + slab_thickness + ptol + matrix_pad, -50/SCALE])
     {
         for (x = [0 : 1 : steps_x])
             for (y = [0 : 1 : steps_y])
@@ -33,7 +28,7 @@ module PinMatrix()
                 xx = abs(steps_x/2 - x + .5);
                 yy = abs(steps_y/2 - y + .5);
                 translate([step*x,step*y, 
-                    apply_mold ? ((x == 0 || x == floor(steps_x) || y == 0 || y == floor(steps_y)) ? 0 : -abs(xx)+-abs(yy)) : 0
+                    (apply_mold ? ((x == 0 || x == floor(steps_x) || y == 0 || y == floor(steps_y)) ? 0 : -abs(xx)+-abs(yy)) : 0)/SCALE
                      ]) 
                         cube([pin_x,pin_x,pin_z]);
             }
@@ -86,9 +81,9 @@ module Assembly()
         {
             color("purple")
             {
-                translate([0,-outside_width/12,0]) rotate([-90,0,0]) cylinder(outside_width+20,linear_bearing_inside_r,linear_bearing_inside_r);
+                translate([0,-outside_width/12,0]) rotate([-90,0,0]) cylinder(outside_width+20/SCALE,linear_bearing_inside_r,linear_bearing_inside_r);
                 cube([0,0,0]);
-                translate([0,-outside_width/12,0]) rotate([-90,0,0]) cylinder(outside_width+20,linear_bearing_inside_r,linear_bearing_inside_r);
+                translate([0,-outside_width/12,0]) rotate([-90,0,0]) cylinder(outside_width+20/SCALE,linear_bearing_inside_r,linear_bearing_inside_r);
             }
         }
     }
