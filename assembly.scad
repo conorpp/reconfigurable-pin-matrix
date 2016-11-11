@@ -1,5 +1,7 @@
 include <defs.scad>
 include <slab.scad>
+use <short_wall.scad>
+use <tall_wall.scad>
 
 
 module to_slab_positions_y(slab_offset = slaby_o)
@@ -47,6 +49,15 @@ module short_wall_origin()
     }
 }
 
+module to_short_wall_positions()
+{
+    short_wall_origin()
+    {
+        children();
+        translate([0, inside_width + short_wall_thickness + ptol]) children();
+    }
+}
+
 
 module tall_wall_origin()
 {
@@ -59,10 +70,10 @@ module tall_wall_origin()
 
 module Solids()
 {
-    short_wall_origin()
+
+    to_short_wall_positions()
     {
         ShortWall();
-        translate([0, inside_width + short_wall_thickness + ptol]) ShortWall();
     }
 
     tall_wall_origin()
@@ -92,6 +103,7 @@ module Holes()
             make_linear_hole();
         }
     }
+    make_short_wall_holes();
 }
 
 
