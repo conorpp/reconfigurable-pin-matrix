@@ -8,11 +8,11 @@ use <assembly.scad>
 
 module PinMatrix()
 {
-    mx_pin_start = tall_wall_thickness + linear_rod_offset + matrix_pad_x + ptol;
-    mx_pin_end = tall_wall_thickness + short_wall_l - linear_rod_offset - matrix_pad_x - ptol;
+    mx_pin_start = tall_wall_x + linear_bearing_offset + matrix_pad_x + ptol;
+    mx_pin_end = tall_wall_x + tall_wall_y - linear_bearing_offset - matrix_pad_x - ptol;
 
-    my_pin_start = short_wall_thickness + slab_thickness + ptol + matrix_pad_y;
-    my_pin_end = tall_wall_l - short_wall_thickness - slab_thickness - ptol - matrix_pad_y;
+    my_pin_start = short_wall_y + slab_y + ptol + matrix_pad_y;
+    my_pin_end = tall_wall_y - short_wall_y - slab_y - ptol - matrix_pad_y;
 
     echo("matrix X,Y", mx_pin_end - mx_pin_start, my_pin_end - my_pin_start);
 
@@ -22,8 +22,8 @@ module PinMatrix()
 
     if (apply_pin_matrix)
     {
-        translate([tall_wall_thickness + linear_rod_offset + matrix_pad_x + ptol,
-                short_wall_thickness + slab_thickness + ptol + matrix_pad_y, -50/SCALE])
+        translate([tall_wall_x + linear_rod_offset + matrix_pad_x + ptol,
+                short_wall_y + slab_y + ptol + matrix_pad_y, -50/SCALE])
         {
             for (x = [0 : 1 : steps_x])
                 for (y = [0 : 1 : steps_y])
@@ -48,9 +48,9 @@ module Assembly()
         {
             color("purple")
             {
-                translate([0,-outside_width/12,0]) rotate([-90,0,0]) cylinder(outside_width+20/SCALE,linear_bearing_inside_r,linear_bearing_inside_r);
+                translate([0,-tall_wall_y/12,0]) rotate([-90,0,0]) cylinder(tall_wall_y+20/SCALE,linear_bearing_ir,linear_bearing_ir);
                 cube([0,0,0]);
-                translate([0,-outside_width/12,0]) rotate([-90,0,0]) cylinder(outside_width+20/SCALE,linear_bearing_inside_r,linear_bearing_inside_r);
+                translate([0,-tall_wall_y/12,0]) rotate([-90,0,0]) cylinder(tall_wall_y+20/SCALE,linear_bearing_ir,linear_bearing_ir);
             }
         }
     }
@@ -60,9 +60,9 @@ module Assembly()
         {
             color("purple")
             {
-                translate([0,-outside_width/9,0]) rotate([-90,0,0]) cylinder(outside_width,linear_bearing_inside_r,linear_bearing_inside_r);
+                translate([0,-tall_wall_y/9,0]) rotate([-90,0,0]) cylinder(tall_wall_y,linear_bearing_ir,linear_bearing_ir);
                 cube([0,0,0]);
-                translate([0,-outside_width/9,0]) rotate([-90,0,0]) cylinder(outside_width,linear_bearing_inside_r,linear_bearing_inside_r);
+                translate([0,-tall_wall_y/9,0]) rotate([-90,0,0]) cylinder(tall_wall_y,linear_bearing_ir,linear_bearing_ir);
             }
         }
     }
@@ -73,9 +73,9 @@ module Assembly()
             cube([0,0,0]);
             color("blue") rotate([-90,0,180])
                 if (model_threads)
-                    metric_thread(bearing_inside_r*2,1,outside_width/2);
+                    metric_thread(bearing_ir*2,1,tall_wall_y/2);
                 else
-                    cylinder(outside_width/2,bearing_inside_r,bearing_inside_r);
+                    cylinder(tall_wall_y/2,bearing_ir,bearing_ir);
             cube([0,0,0]);
         }
     }
