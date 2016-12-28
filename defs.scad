@@ -3,6 +3,12 @@
 // Special
 function in2mm( mm ) = mm*25.4;
 function mm( mm ) = mm;
+module orange() { color("orange") children(); }
+module red() { color("red") children(); }
+module purple() { color("purple") children(); }
+module blue() { color("blue") children(); }
+module green() { color("green") children(); }
+module black() { color("black") children(); }
 $fs = 0.1;
 forever = 1000;
 //
@@ -49,7 +55,7 @@ slab_y = _slab_thickness;
 slab_z = short_wall_z;
 
 
-linear_bearing_offset = tall_wall_y/6;
+linear_bearing_offset = tall_wall_y/4;
 linear_bearing_or = in2mm(1/4/2);
 linear_bearing_ir = in2mm(1/8/2);
 

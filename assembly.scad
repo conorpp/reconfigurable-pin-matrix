@@ -67,6 +67,22 @@ module tall_wall_origin()
     }
 }
 
+module to_tall_wall_positions()
+{
+    tall_wall_origin()
+    {
+        rotate([0,0,180])
+        {
+            translate([-tall_wall_x,-tall_wall_y,0])
+            {
+                children();
+            }
+        }
+        translate([short_wall_x + tall_wall_x + ptol, 0, 0]) children();
+    }
+}
+
+
 
 module Solids()
 {
@@ -76,13 +92,9 @@ module Solids()
         color("orange") ShortWall();
     }
 
-    tall_wall_origin()
+    to_tall_wall_positions()
     {
         TallWall();
-        translate([tall_wall_x + tall_wall_y + ptol,0,0])
-        {
-            TallWall();
-        }
     }
 
     to_slab_positions()
@@ -104,6 +116,7 @@ module Holes()
         }
     }
     make_short_wall_holes();
+    tall_wall_holes();
 }
 
 

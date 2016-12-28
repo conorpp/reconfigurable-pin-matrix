@@ -7,9 +7,31 @@ module short_wall_holes()
     
 }
 
+short_wall_ext_x = tall_wall_x + ptol/2;
+short_wall_ext_y = short_wall_y;
+short_wall_ext_z = short_wall_z;
+
 module ShortWall()
 {
+    difference()
+    {
+        _ShortWall();
+        short_wall_cuts();
+    }
+}
+
+module _ShortWall()
+{
     cube([ short_wall_x, short_wall_y, short_wall_z]);
+    translate([-short_wall_ext_x,0,0])
+    {
+        orange() cube([ short_wall_ext_x, short_wall_ext_y, short_wall_ext_z]);
+    }
+    translate([short_wall_x,0,0])
+    {
+        orange() cube([ short_wall_ext_x, short_wall_ext_y, short_wall_ext_z]);
+    }
+
 }
 
 module _put_screw_holes(rot=0)
@@ -33,23 +55,20 @@ module _put_screw_holes(rot=0)
 
 module make_short_wall_holes()
 {
-    to_short_wall_positions()
-    {
-        translate([short_wall_cut_offset,0,0])
-        {
-            cube([short_wall_cut_x, short_wall_cut_y, short_wall_cut_z]);
-        }
-        translate([tall_wall_y - short_wall_cut_offset - short_wall_cut_x,0,0])
-        {
-            cube([short_wall_cut_x, short_wall_cut_y, short_wall_cut_z]);
-        }
-
-        /*_put_screw_holes();*/
-        /*translate([slab_l,0,0])*/
-            /*_put_screw_holes(180);*/
-    }
 }
 
+module short_wall_cuts()
+{
+    translate([-short_wall_ext_x + short_wall_cut_x,0,0])
+    {
+        cube([short_wall_cut_x, short_wall_cut_y, short_wall_cut_z]);
+    }
+    // account for tolerance spacing in short_wall_ext_x
+    translate([short_wall_x + short_wall_ext_x - 2*short_wall_cut_x,0,0])
+    {
+        cube([short_wall_cut_x, short_wall_cut_y, short_wall_cut_z]);
+    }
+}
 
 difference()
 {
