@@ -3,38 +3,42 @@ include <slab.scad>
 use <short_wall.scad>
 use <tall_wall.scad>
 
-
 module to_slab_positions_y(slab_offset = slaby_o)
 {
+    start_z = short_wall_z/2 - slab_z/2 + ptol;
     // close short slab
     translate([tall_wall_x + ptol/2,
             short_wall_y + ptol + slab_offset,
-            0]) children();
+             start_z ]) children();
 
     // far short slab
     translate([tall_wall_x + ptol/2, 
             tall_wall_y - (short_wall_y+slab_y)  - slab_offset,
-            0])
+            start_z])
         translate([tall_wall_y,slab_y,0]) rotate([0,0,180]) children();
 }
+
 module to_slab_positions_x(slab_offset = slabx_o)
 {
+    short_wall_top = short_wall_z + ptol;
+    short_wall_bot = -ptol;
     // right top slab
-    translate([ tall_wall_x + tall_wall_y - slab_y - slab_offset,0,short_wall_z + ptol])
+    translate([ tall_wall_x + tall_wall_y - slab_y - slab_offset,0,short_wall_top])
         translate([slab_y,0,0]) rotate([0,0,90]) children();
 
     // right bottom slab
-    translate([tall_wall_x + tall_wall_y - slab_y - slab_offset,0,-short_wall_z - ptol])
+    translate([tall_wall_x + tall_wall_y - slab_y - slab_offset,0,-slab_z + short_wall_bot])
         translate([slab_y,0,0]) rotate([0,0,90]) children();
 
     // left top slab
-    translate([tall_wall_x + ptol + slab_offset,0, short_wall_z + ptol])
+    translate([tall_wall_x + ptol + slab_offset,0, short_wall_top])
         translate([0,tall_wall_y,0]) rotate([0,0,-90]) children();
 
     // left bottom slab
-    translate([tall_wall_x + ptol + slab_offset,0, -short_wall_z - ptol])
+    translate([tall_wall_x + ptol + slab_offset,0, -slab_z + short_wall_bot])
         translate([0,tall_wall_y,0]) rotate([0,0,-90]) children();
 }
+
 module to_slab_positions(slab_offsetx = slabx_o, slab_offsety = slaby_o)
 {
     to_slab_positions_x(slab_offsetx) children();

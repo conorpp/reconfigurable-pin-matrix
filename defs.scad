@@ -48,18 +48,19 @@ ptol = 1/SCALE;
 
 // Slabs and holes
 
-_slab_thickness = in2mm(1.0/4);
+_slab_thickness = in2mm(1.0/4)*2;
+_bearing_tightness_e = in2mm(1.0/4/20);
 
-slab_x = tall_wall_y;
+slab_x = tall_wall_y*14/20;
 slab_y = _slab_thickness;
-slab_z = short_wall_z;
+slab_z = short_wall_z/2;
 
 
-linear_bearing_offset = tall_wall_y/4;
+linear_bearing_offset = slab_x/40;
 linear_bearing_or = in2mm(1/4/2);
 linear_bearing_ir = in2mm(1/8/2);
 
-bearing_or = in2mm(1.0/4/2);
+bearing_or = in2mm(1.0/4/2) - _bearing_tightness_e;
 bearing_ir = in2mm(1.0/8/2);
 bearing_y = in2mm(3.0/32);
 

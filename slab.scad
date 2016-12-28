@@ -1,9 +1,14 @@
 include <defs.scad>
 
+_slab_offset = (tall_wall_y - slab_x)/2;
 
 module make_slab()
 {
-    cube([slab_x, slab_y, slab_z]);
+    // grow about center x
+    translate([_slab_offset, 0, 0])
+    {
+        cube([slab_x, slab_y, slab_z]);
+    }
 }
 
 module make_linear_hole()
@@ -23,17 +28,20 @@ module make_bearing_insert()
 
 module make_slab_holes()
 {
-    translate([linear_bearing_offset,0,short_wall_z/2])
+    /*translate([_slab_offset, 0, 0])*/
     {
-        if ($children > 0) children(0);
-    }
-    translate([tall_wall_y - linear_bearing_offset,0,short_wall_z/2])
-    {
-        if ($children > 2) children(2);
-    }
-    translate([tall_wall_y/2,0,short_wall_z/2])
-    {
-        if ($children > 1) children(1);
+        translate([(linear_bearing_offset+_slab_offset),0,slab_z/2])
+        {
+            if ($children > 0) children(0);
+        }
+        translate([tall_wall_y - (linear_bearing_offset+_slab_offset),0,slab_z/2])
+        {
+            if ($children > 2) children(2);
+        }
+        translate([tall_wall_y/2,0,slab_z/2])
+        {
+            if ($children > 1) children(1);
+        }
     }
 }
 
