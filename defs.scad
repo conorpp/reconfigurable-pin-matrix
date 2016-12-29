@@ -69,8 +69,8 @@ threaded_rod_r_grip = in2mm(0.015);  // how much to shrink hole on threaded rod 
 
 // Assembly and appearance
 
-slabx_o = in2mm(0.1);
-slaby_o = in2mm(0.1);
+slabx_o = in2mm(1);
+slaby_o = in2mm(1);
 
 pin_z = 150/SCALE;
 pin_x = 2/SCALE;

@@ -17,9 +17,27 @@ module make_linear_hole()
     // infinite hole
     rotate([-90,0,180]) cylinder(forever,linear_bearing_ir,linear_bearing_ir);
 }
+
+overhang_x = 0.40; // percentage
+slab_cut_x = bearing_or*2 * (1- overhang_x) ;
+slab_cut_y = slab_y/5;
+slab_cut_z = bearing_or/2.0 + slab_z/2.0 + ptol;
+
+slab_cut2_x = bearing_or*2;
+slab_cut2_y = bearing_y;
+slab_cut2_z = bearing_or/2.0 + slab_z/2.0 + ptol;
+
 module make_bearing_insert()
 {
-    rotate([-90,0,0]) cylinder(bearing_y,bearing_or,bearing_or);
+    translate([-slab_cut_x/2, 0, -bearing_or/2 - ptol])
+    {
+        cube([slab_cut_x, slab_cut_y, slab_cut_z]);
+    }
+    translate([-slab_cut2_x/2, slab_cut_y, -bearing_or/2 - ptol])
+    {
+        cube([slab_cut2_x, slab_cut2_y, slab_cut2_z]);
+    }
+    /*rotate([-90,0,0]) cylinder(bearing_y,bearing_or,bearing_or);*/
     // infinite hole
     r = bearing_ir - threaded_rod_r_grip;
     rotate([-90,0,180]) cylinder(forever,r,r);
