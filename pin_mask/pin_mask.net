@@ -1,0 +1,36 @@
+(export (version D)
+  (design
+    (source C:/Users/conor/Desktop/pin_mask/pin_mask.sch)
+    (date "1/17/2017 5:35:58 PM")
+    (tool "Eeschema 4.0.4-stable")
+    (sheet (number 1) (name /) (tstamps /)
+      (title_block
+        (title)
+        (company)
+        (rev)
+        (date)
+        (source pin_mask.sch)
+        (comment (number 1) (value ""))
+        (comment (number 2) (value ""))
+        (comment (number 3) (value ""))
+        (comment (number 4) (value "")))))
+  (components
+    (comp (ref pin1)
+      (value pin)
+      (footprint .pretty:pin)
+      (libsource (lib pin) (part pin))
+      (sheetpath (names /) (tstamps /))
+      (tstamp 587E9B6D)))
+  (libparts
+    (libpart (lib pin) (part pin)
+      (fields
+        (field (name Reference) pin)
+        (field (name Value) pin))
+      (pins
+        (pin (num 1) (name pin) (type input)))))
+  (libraries
+    (library (logical pin)
+      (uri C:\Users\conor\Desktop\pin_mask\pin.lib)))
+  (nets
+    (net (code 1) (name "Net-(pin1-Pad1)")
+      (node (ref pin1) (pin 1)))))
