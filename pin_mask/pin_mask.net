@@ -1,7 +1,7 @@
 (export (version D)
   (design
-    (source C:/Users/conor/Desktop/pin_mask/pin_mask.sch)
-    (date "1/17/2017 5:35:58 PM")
+    (source C:/Users/conor/Desktop/reconfigurable-pin-matrix/pin_mask/pin_mask.sch)
+    (date "2/9/2017 7:19:02 PM")
     (tool "Eeschema 4.0.4-stable")
     (sheet (number 1) (name /) (tstamps /)
       (title_block
@@ -17,7 +17,7 @@
   (components
     (comp (ref pin1)
       (value pin)
-      (footprint .pretty:pin)
+      (footprint footprints:pin)
       (libsource (lib pin) (part pin))
       (sheetpath (names /) (tstamps /))
       (tstamp 587E9B6D)))
@@ -30,7 +30,7 @@
         (pin (num 1) (name pin) (type input)))))
   (libraries
     (library (logical pin)
-      (uri C:\Users\conor\Desktop\pin_mask\pin.lib)))
+      (uri C:\Users\conor\Desktop\reconfigurable-pin-matrix\pin_mask\pin.lib)))
   (nets
     (net (code 1) (name "Net-(pin1-Pad1)")
       (node (ref pin1) (pin 1)))))

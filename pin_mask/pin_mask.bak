@@ -50,7 +50,7 @@ U 1 1 587E9B6D
 P 5500 2550
 F 0 "pin1" H 5500 2550 60  0000 C CNN
 F 1 "pin" H 5500 2550 60  0000 C CNN
-F 2 "footprints:pin" H 5500 2550 60  0001 C CNN
+F 2 ".pretty:pin" H 5500 2550 60  0001 C CNN
 F 3 "" H 5500 2550 60  0001 C CNN
 	1    5500 2550
 	1    0    0    -1  
