@@ -16,9 +16,11 @@ forever = 1000;
 // Configuration
 SCALE = 1.65;  
 model_threads = 0;  // inversely proportional to size
-apply_mold = 1;
 apply_pin_matrix = 1;
+apply_mold = 1;
+apply_fixture = 1;
 inside_width = 130/SCALE;
+matrix_x = 50.8;
 //
 
 // Walls
@@ -49,6 +51,20 @@ tall_wall_ext_z = tall_wall_z;
 
 tall_wall_cut_x = tall_wall_x/2;
 tall_wall_cut_y = short_wall_y + ptol;
+
+fixture_wall_x = matrix_x * .10;
+fixture_wall_y = matrix_x * .10;
+fixture_wall_z = matrix_x * .10;
+
+fixture_x = matrix_x + fixture_wall_x*2;
+fixture_y = matrix_x + fixture_wall_y*2;
+fixture_z = matrix_x/2;
+
+fixture_top_cut_x = fixture_x - fixture_wall_x*2 + ptol/2;
+fixture_top_cut_y = fixture_y - fixture_wall_y*2 + ptol/2;
+fixture_top_cut_z = fixture_z - fixture_wall_z;
+
+fixture_bottom_hole_r = 5;
 
 
 
@@ -81,6 +97,11 @@ bearing_ir = in2mm(1.0/8/2);
 bearing_y = in2mm(3.0/32);
 
 threaded_rod_r_grip = in2mm(0.015);  // how much to shrink hole on threaded rod to get traction
+
+
+
+
+
 //
 
 // Assembly and appearance
@@ -89,8 +110,17 @@ slaby_o = in2mm(.0);
 
 pin_z = 150/SCALE;
 pin_x = 2/SCALE;
-matrix_x = 50.8;
 pin_pad = 0.2;
+
+mid_y = tall_wall_y/2;
+mid_x = (short_wall_x + short_wall_ext_x*2)/2;
+
+mx_pin_start = mid_x - matrix_x/2;
+mx_pin_end = mid_x + matrix_x/2;
+
+my_pin_start = mid_y - matrix_x/2;
+my_pin_end = mid_y + matrix_x/2;
+
 //
 
 

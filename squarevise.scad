@@ -4,6 +4,7 @@ use <threads.scad>
 use <slab.scad>
 use <short_wall.scad>
 use <tall_wall.scad>
+use <fixture.scad>
 use <assembly.scad>
 
 module PinMatrix()
@@ -13,7 +14,6 @@ module PinMatrix()
 
     mx_pin_start = mid_x - matrix_x/2;
     mx_pin_end = mid_x + matrix_x/2;
-
 
     my_pin_start = mid_y - matrix_x/2;
     my_pin_end = mid_y + matrix_x/2;

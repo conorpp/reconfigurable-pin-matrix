@@ -2,6 +2,7 @@ include <defs.scad>
 include <slab.scad>
 use <short_wall.scad>
 use <tall_wall.scad>
+use <fixture.scad>
 
 module to_slab_positions_y(slab_offset = slaby_o)
 {
@@ -86,6 +87,17 @@ module to_tall_wall_positions()
     }
 }
 
+module to_fixture_position()
+{
+    translate([fixture_x + mx_pin_start - fixture_wall_x, my_pin_start - fixture_wall_y, fixture_z + 110/SCALE])
+    {
+        rotate([0,180,0])
+        {
+            children();
+        }
+    }
+}
+
 
 
 module Solids()
@@ -104,6 +116,13 @@ module Solids()
     to_slab_positions()
     {
         color("green") make_slab();
+    }
+    if (apply_fixture)
+    {
+        to_fixture_position()
+        {
+            Fixture();
+        }
     }
 
 }
