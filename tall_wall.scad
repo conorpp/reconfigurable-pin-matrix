@@ -2,22 +2,19 @@ include <defs.scad>
 use <assembly.scad>
 use <slab.scad>
 
-wall_locking_tolerance = ptol;
-
-tall_wall_ext_x = tall_wall_x;
-tall_wall_ext_y = tall_wall_y/20;
-tall_wall_ext_z = tall_wall_z;
 
 module _TallWall()
 {
     cube([tall_wall_x, tall_wall_y, tall_wall_z ]);
     translate([0,-tall_wall_ext_y,0])
     {
-        orange() cube([tall_wall_ext_x, tall_wall_ext_y, tall_wall_ext_z ]);
+        /*orange() */
+        cube([tall_wall_ext_x, tall_wall_ext_y, tall_wall_ext_z ]);
     }
     translate([0,tall_wall_y,0])
     {
-        orange() cube([tall_wall_ext_x, tall_wall_ext_y, tall_wall_ext_z ]);
+        /*orange() */
+        cube([tall_wall_ext_x, tall_wall_ext_y, tall_wall_ext_z ]);
     }
 }
 
@@ -37,11 +34,11 @@ module cut_lock()
 
     translate([0,0,cut_start])
     {
-        cube([tall_wall_x,short_wall_y + wall_locking_tolerance,leftover]);
+        cube([tall_wall_x, tall_wall_cut_y ,leftover]);
     }
     translate([tall_wall_x/2,0,0])
     {
-        cube([tall_wall_x/2,short_wall_y + wall_locking_tolerance,cut_start]);
+        cube([tall_wall_cut_x, tall_wall_cut_y, cut_start]);
     }
 }
 
@@ -52,7 +49,7 @@ module tall_wall_holes()
 module tall_wall_cuts()
 {
     cut_lock();
-    translate([0,tall_wall_y - short_wall_y - wall_locking_tolerance,0])
+    translate([0,tall_wall_y - tall_wall_cut_y,0])
     {
         cut_lock();
     }

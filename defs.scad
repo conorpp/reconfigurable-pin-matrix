@@ -14,15 +14,16 @@ forever = 1000;
 //
 
 // Configuration
-SCALE = 2;  
+SCALE = 1.65;  
 model_threads = 0;  // inversely proportional to size
-apply_mold = 0;
-apply_pin_matrix = 0;
+apply_mold = 1;
+apply_pin_matrix = 1;
 inside_width = 130/SCALE;
 //
 
 // Walls
 
+ptol = 1/SCALE;
 _wall_thickness = 20/SCALE;
 
 short_wall_x = inside_width + _wall_thickness*2;
@@ -33,17 +34,30 @@ tall_wall_x = _wall_thickness;
 tall_wall_y = short_wall_x;
 tall_wall_z = short_wall_z * 3;
 
-
 short_wall_cut_y = short_wall_y;
-short_wall_cut_x = tall_wall_x/2;
+short_wall_cut_x = tall_wall_x/2+ptol;
 short_wall_cut_z = short_wall_z*4/5;
 short_wall_cut_offset = tall_wall_x/2;
+
+short_wall_ext_x = tall_wall_x + ptol/2;
+short_wall_ext_y = short_wall_y;
+short_wall_ext_z = short_wall_z;
+
+tall_wall_ext_x = tall_wall_x;
+tall_wall_ext_y = tall_wall_y/20;
+tall_wall_ext_z = tall_wall_z;
+
+tall_wall_cut_x = tall_wall_x/2;
+tall_wall_cut_y = short_wall_y + ptol;
+
+
 
 slab_shortener = 4/SCALE;
 slab_wall = short_wall_z/2;
 
 hole_rad = 2/SCALE;
-ptol = 1/SCALE;
+
+
 //
 
 // Slabs and holes
@@ -60,6 +74,8 @@ linear_bearing_offset = slab_x/40;
 linear_bearing_or = in2mm(1/4/2);
 linear_bearing_ir = in2mm(1/8/2);
 
+
+
 bearing_or = in2mm(1.0/4/2) - _bearing_tightness_e;
 bearing_ir = in2mm(1.0/8/2);
 bearing_y = in2mm(3.0/32);
@@ -68,13 +84,13 @@ threaded_rod_r_grip = in2mm(0.015);  // how much to shrink hole on threaded rod 
 //
 
 // Assembly and appearance
-
-slabx_o = in2mm(1);
-slaby_o = in2mm(1);
+slabx_o = in2mm(.3);
+slaby_o = in2mm(.0);
 
 pin_z = 150/SCALE;
 pin_x = 2/SCALE;
-matrix_pad_x = 8;
-matrix_pad_y = 2;
+matrix_x = 50.8;
 pin_pad = 0.2;
 //
+
+

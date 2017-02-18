@@ -8,11 +8,15 @@ use <assembly.scad>
 
 module PinMatrix()
 {
-    mx_pin_start = tall_wall_x + linear_bearing_offset + matrix_pad_x + ptol;
-    mx_pin_end = tall_wall_x + tall_wall_y - linear_bearing_offset - matrix_pad_x - ptol;
+    mid_y = tall_wall_y/2;
+    mid_x = (short_wall_x + short_wall_ext_x*2)/2;
 
-    my_pin_start = short_wall_y + slab_y + ptol + matrix_pad_y;
-    my_pin_end = tall_wall_y - short_wall_y - slab_y - ptol - matrix_pad_y;
+    mx_pin_start = mid_x - matrix_x/2;
+    mx_pin_end = mid_x + matrix_x/2;
+
+
+    my_pin_start = mid_y - matrix_x/2;
+    my_pin_end = mid_y + matrix_x/2;
 
     echo("matrix X,Y", mx_pin_end - mx_pin_start, my_pin_end - my_pin_start);
 
@@ -22,8 +26,8 @@ module PinMatrix()
 
     if (apply_pin_matrix)
     {
-        translate([tall_wall_x + linear_rod_offset + matrix_pad_x + ptol,
-                short_wall_y + slab_y + ptol + matrix_pad_y, -50/SCALE])
+        translate([mx_pin_start,
+                my_pin_start, -50/SCALE])
         {
             for (x = [0 : 1 : steps_x])
                 for (y = [0 : 1 : steps_y])

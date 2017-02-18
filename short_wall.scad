@@ -6,11 +6,6 @@ module short_wall_holes()
 {
     
 }
-
-short_wall_ext_x = tall_wall_x + ptol/2;
-short_wall_ext_y = short_wall_y;
-short_wall_ext_z = short_wall_z;
-
 module ShortWall()
 {
     difference()
@@ -25,11 +20,13 @@ module _ShortWall()
     cube([ short_wall_x, short_wall_y, short_wall_z]);
     translate([-short_wall_ext_x,0,0])
     {
-        orange() cube([ short_wall_ext_x, short_wall_ext_y, short_wall_ext_z]);
+        /*orange() */
+        cube([ short_wall_ext_x, short_wall_ext_y, short_wall_ext_z]);
     }
     translate([short_wall_x,0,0])
     {
-        orange() cube([ short_wall_ext_x, short_wall_ext_y, short_wall_ext_z]);
+        /*orange() */
+        cube([ short_wall_ext_x, short_wall_ext_y, short_wall_ext_z]);
     }
 
 }
@@ -59,12 +56,12 @@ module make_short_wall_holes()
 
 module short_wall_cuts()
 {
-    translate([-short_wall_ext_x + short_wall_cut_x,0,0])
+    translate([-short_wall_ext_x + (tall_wall_x-tall_wall_cut_x) -ptol,0,0])
     {
         cube([short_wall_cut_x, short_wall_cut_y, short_wall_cut_z]);
     }
     // account for tolerance spacing in short_wall_ext_x
-    translate([short_wall_x + short_wall_ext_x - 2*short_wall_cut_x,0,0])
+    translate([short_wall_x + short_wall_ext_x - (tall_wall_x-tall_wall_cut_x) - short_wall_cut_x + ptol,0,0])
     {
         cube([short_wall_cut_x, short_wall_cut_y, short_wall_cut_z]);
     }
