@@ -92,9 +92,9 @@ linear_bearing_ir = in2mm(1/8/2);
 
 
 
-bearing_or = in2mm(1.0/4/2) - _bearing_tightness_e;
+bearing_or = mm(7.05 + ptol);
 bearing_ir = in2mm(1.0/8/2);
-bearing_y = in2mm(3.0/32);
+bearing_y = mm(3.1+ ptol);
 
 threaded_rod_r_grip = in2mm(0.015);  // how much to shrink hole on threaded rod to get traction
 

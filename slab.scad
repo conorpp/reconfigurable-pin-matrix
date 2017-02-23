@@ -18,7 +18,7 @@ module make_linear_hole()
     rotate([-90,0,180]) cylinder(forever,linear_bearing_ir,linear_bearing_ir);
 }
 
-overhang_x = 0.40; // percentage
+overhang_x = 0.35; // percentage
 slab_cut_x = bearing_or*2 * (1- overhang_x) ;
 slab_cut_y = slab_y/5;
 slab_cut_z = bearing_or/2.0 + slab_z/2.0 + ptol;
